@@ -101,7 +101,7 @@ int main(){
       if (temp != ""){
         point[numPoints].x = std::stof(temp); //salva cood x
       }
-       temp = "";
+       temp = " ";
 
       for (i = i+1 ; i < line.size();i++){
             temp = temp + line[i];
