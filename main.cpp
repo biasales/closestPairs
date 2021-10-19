@@ -12,26 +12,38 @@ struct points {
     float y;
 };
 
+float minDistance(points point[], int size){
+    int m,dl,dr,d;
+    int j = 0, i =0;
+    if (size<=3)
+    {
+        //return minDistBrute(point[0]);
+    }
+    m = size/2;
+   // dl = minDistance(point[0],m);
+    //dr = minDistance(point[m],n-m);
+    //d = min(dl,dr);
+    
+
+}
+
 void merge(points array[], int const left, int const mid, int const right)
 {
     int const subArrayOne = mid - left + 1;
     int const subArrayTwo = right - mid;
   
-    // Create temp arrays
     points *leftArray = new points[subArrayOne],
          *rightArray = new points[subArrayTwo];
   
-    // Copy data to temp arrays leftArray[] and rightArray[]
     for (int i = 0; i < subArrayOne; i++)
         leftArray[i] = array[left + i];
     for (int j = 0; j < subArrayTwo; j++)
         rightArray[j] = array[mid + 1 + j];
   
-    int indexOfSubArrayOne = 0, // Initial index of first sub-array
-        indexOfSubArrayTwo = 0; // Initial index of second sub-array
-    int indexOfMergedArray = left; // Initial index of merged array
-  
-    // Merge the temp arrays back into array[left..right]
+    int indexOfSubArrayOne = 0,
+        indexOfSubArrayTwo = 0; 
+    int indexOfMergedArray = left;
+
     while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
         if (leftArray[indexOfSubArrayOne].x <= rightArray[indexOfSubArrayTwo].x) {
             array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
@@ -43,25 +55,19 @@ void merge(points array[], int const left, int const mid, int const right)
         }
         indexOfMergedArray++;
     }
-    // Copy the remaining elements of
-    // left[], if there are any
+
     while (indexOfSubArrayOne < subArrayOne) {
         array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
         indexOfSubArrayOne++;
         indexOfMergedArray++;
     }
-    // Copy the remaining elements of
-    // right[], if there are any
+
     while (indexOfSubArrayTwo < subArrayTwo) {
         array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
         indexOfSubArrayTwo++;
         indexOfMergedArray++;
     }
 }
-  
-// begin is for left index and end is
-// right index of the sub-array
-// of arr to be sorted 
 
 void mergeSort(points array[], int const begin, int const end)
 {
@@ -75,18 +81,20 @@ void mergeSort(points array[], int const begin, int const end)
 }
 
 
+
 int main(){
   string line,temp = "";
-  char c = 0;
-  int i =0, numPoints = -1,n = 5;
+  int i =0, numPoints = -1,size = 5;
   points *point;
+  float distance;
 
-  point = (points *)malloc(sizeof(points)*n);
+  point = (points *)malloc(sizeof(points)*size);
 
-  ifstream myfile ("input.txt"); //abre arquivo
+  ifstream myfile ("input.txt"); 
+  //TODO:ler o n do arquivo
   if (myfile.is_open())
   {
-    while (! myfile.eof() ) //enquanto end of file for false continua
+    while (! myfile.eof() )
     {
       getline (myfile,line);
       temp = "";
@@ -99,39 +107,33 @@ int main(){
           }
       }
       if (temp != ""){
-        point[numPoints].x = std::stof(temp); //salva cood x
+        point[numPoints].x = std::stof(temp); 
       }
-       temp = " ";
+       temp = "";
 
       for (i = i+1 ; i < line.size();i++){
             temp = temp + line[i];
       }
 
       if (temp != ""){
-         point[numPoints].y = std::stof(temp); //salva cood y
+         point[numPoints].y = std::stof(temp); 
       }
       
         numPoints++;
-     
+
     }
   }
  
 
-   for(i = 0; i< n; i++){
+   for(i = 0; i< size; i++){
       cout <<"Ponto x "<<point[i].x<<endl;
       cout <<"Ponto y "<<point[i].y<<endl;
       cout<<"++++++++++++++++++++++"<<endl;
   }
 
-  mergeSort(point,0,4);
-  cout<<"depois do merge"<<endl;
+  mergeSort(point,0,size-1);
 
-    for(i = 0; i< n; i++){
-      cout <<"Ponto x "<<point[i].x<<endl;
-      cout <<"Ponto y "<<point[i].y<<endl;
-      cout<<"++++++++++++++++++++++"<<endl;
-  }
-
+  distance = minDistance(point,size);
 
   return 0;
 }
