@@ -5,7 +5,6 @@
 #include <vector>
 #include <algorithm>    // std::sort
 #include <math.h>
-#include <tuple>
 
 #include <iomanip>
 #include<tuple>
@@ -172,7 +171,7 @@ void openFile(ifstream& inFile, string filename){
     }
 }
 
-tuple<points*, int> readfile(ifstream& inFile){
+points* readfile(ifstream& inFile){
     points *point;
 
     string line;
@@ -195,17 +194,18 @@ tuple<points*, int> readfile(ifstream& inFile){
         }
        pos++;
     }
-    return make_tuple(point, stoi(size));
+    return point;
 }
 
 int main(){
     ifstream inFile;
     points* point;
-    int size;
+    
+    int size = 5;
     openFile(inFile,"input.txt");
     // Unpack tuple
-    tie(point,size) = readfile(inFile);
-    cout << "Tamanho "<< size << endl;
+    point = readfile(inFile);
+    
     for (int i = 0; i < 5; i++)
         cout<< std::setprecision(4) << std::fixed<< point[i].x<<" "<< point[i].y<<endl;
     
