@@ -22,6 +22,7 @@ class points
 float calcDistance(float x1,float y1, float x2, float y2);
 void mergeSort(points array[], int const begin, int const end, char pos);
 float minDistFront(points* aux, int m, float mind);
+float DistBrute(points* point,int size);
 
 
 float minDistance(points* point, int size){
@@ -35,8 +36,7 @@ float minDistance(points* point, int size){
 
     if (size<=3)
     {
-        // return DistBrute(point);
-        return 0.0;
+        return DistBrute(point,size);
     }
     mid = size/2;
     dl = minDistance(point,mid);
@@ -68,20 +68,19 @@ float minDistFront(points* aux, int m, float mind){
     return mind;
 }
 
-// float DistBrute(points* point){
+float DistBrute(points* point,int size){
 
-//     float minDist = 9999999999999;
-    // Comentado pois o point.size() não funciona
+    float minDist = 9999999999999;
 
-    // float dist = 0;
-    // for(int i = 0; i < point.size(); i++){
-    //     dist = calcDistance(point[i].x, point[i].y, point[i+1].x, point[i+1].y); 
-    //     if (dist < minDist)
-    //         minDist = dist;
-    // }
+     float dist = 0;
+     for(int i = 0; i < size ;i++){
+        dist = calcDistance(point[i].x, point[i].y, point[i+1].x, point[i+1].y); 
+        if (dist < minDist)
+            minDist = dist;
+    }
     
-//     return minDist;
-// }
+     return minDist;
+ }
 
 float calcDistance(float x1,float y1, float x2, float y2){ //teorema de euclides
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
@@ -200,55 +199,13 @@ points* readfile(ifstream& inFile){
 int main(){
     ifstream inFile;
     points* point;
+    float distancePoints;
     
     int size = 5;
     openFile(inFile,"input.txt");
     // Unpack tuple
     point = readfile(inFile);
     
-    for (int i = 0; i < 5; i++)
-        cout<< std::setprecision(4) << std::fixed<< point[i].x<<" "<< point[i].y<<endl;
-    
-//   string line,temp = "";
-//   int i =0, numPoints = -1,size = 5;
-//   points *point;
-//   float distance;
-
-//   point = (points *)malloc(sizeof(points)*size);
-
-//   ifstream myfile ("input.txt"); //TODO: separar leitura de arquivo em uma função
-//   //TODO:ler o n do arquivo
-//   if (myfile.is_open())
-//   {
-//     while (! myfile.eof() )
-//     {
-//       getline (myfile,line);
-//       temp = "";
-//       for(i=0; i < line.size();i++){
-//           if (line[i] != ' '){
-//               temp = temp + line[i];
-//           }
-//           else {
-//               break;
-//           }
-//       }
-//       if (temp != ""){
-//         point[numPoints].x = std::stof(temp); 
-//       }
-//        temp = "";
-
-//       for (i = i+1 ; i < line.size();i++){
-//             temp = temp + line[i];
-//       }
-
-//       if (temp != ""){
-//          point[numPoints].y = std::stof(temp); 
-//       }
-      
-//         numPoints++;
-//     }
-//   }
- 
     mergeSort(point,0,size-1,'x');
 
   for(int i = 0; i< size; i++){
@@ -257,7 +214,9 @@ int main(){
       cout<<"++++++++++++++++++++++"<<endl;
   }
 
-    // distance = minDistance(point,size);
+    distancePoints = minDistance(point,size);
+
+    cout<<"a menor distancia eh"<<distancePoints<<endl;
 
   return 0;
 }
