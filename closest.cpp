@@ -222,7 +222,7 @@ int main(int argc,char* argv[]){
     
     clock_t start = clock();
     
-    openFile(inFile,"input.txt");
+    openFile(inFile,argv[1]);
     getline(inFile, firstLine);
     size = stoi(firstLine);
     point = readfile(inFile, size);
