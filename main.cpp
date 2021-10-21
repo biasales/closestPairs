@@ -216,7 +216,7 @@ int main(){
 
     distancePoints = minDistance(point,size);
 
-    cout<<"a menor distancia eh"<<distancePoints<<endl;
+    cout<< std::setprecision(4) << std::fixed<<distancePoints<<" essa foi a distancia"<<endl;
 
   return 0;
 }
