@@ -200,10 +200,12 @@ int main(){
     ifstream inFile;
     points* point;
     float distancePoints;
+    //TODO: size de variavel, só jogar na main 
+    //TODO: precision do float, na hora de dar o stof
+    //TODO: makefile, exemplo do prof
     
     int size = 5;
     openFile(inFile,"input.txt");
-    // Unpack tuple
     point = readfile(inFile);
     
     mergeSort(point,0,size-1,'x');
