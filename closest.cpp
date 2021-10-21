@@ -6,7 +6,6 @@
 #include <algorithm>   
 #include <math.h>
 #include <time.h>
-
 #include <iomanip>
 #include<tuple>
 using namespace std;
@@ -67,7 +66,7 @@ stcDistance minDistFront(points* aux, int m, stcDistance mind){
     int i;
     double auxd;
 
-    mergeSort(aux, 0, m-1, 'y');//em funcao de y
+    mergeSort(aux, 0, m-1, 'y');
     for (i = 0; i <= m-1; i++){
         for (int j = i+1; ((j < m) && (aux[m].y) < mind.size); j++){
             auxd = calcDistance(aux[i].x, aux[i].y, aux[j].x, aux[j].y);
@@ -102,7 +101,7 @@ stcDistance DistBrute(points* point, int size){
     return dist;
  }
 
-double calcDistance(double x1,double y1, double x2, double y2){ //teorema de euclides
+double calcDistance(double x1,double y1, double x2, double y2){ 
     return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
 }
 
@@ -164,10 +163,10 @@ void merge(points array[], int const left, int const mid, int const right, char 
     }
 }
 
-void mergeSort(points array[], int const begin, int const end, char pos) //falta x ou y
+void mergeSort(points array[], int const begin, int const end, char pos) 
 {
     if (begin >= end)
-        return; // Returns recursively
+        return; 
   
     int mid = begin + (end - begin) / 2;
 
@@ -199,7 +198,6 @@ points* readfile(ifstream& inFile, int size){
         stringstream  is(line);
 
         if (inFile.good()) {
-            // Split String coordinates
             getline(is, coordinate, ' ');
             point[pos].x = stod(coordinate); 
             getline(is, coordinate, ' ');
@@ -224,7 +222,7 @@ int main(int argc,char* argv[]){
     
     clock_t start = clock();
     
-    openFile(inFile,argv[1]);
+    openFile(inFile,"input.txt");
     getline(inFile, firstLine);
     size = stoi(firstLine);
     point = readfile(inFile, size);
@@ -236,6 +234,6 @@ int main(int argc,char* argv[]){
     clock_t end = clock();
     timeElapsed = double(end-start)/CLOCKS_PER_SEC;
 
-    printf("%.6fs %.6f %.6f %.6f %.6f %.6f\n", timeElapsed, distancePoints.size, distancePoints.x1, distancePoints.y1, distancePoints.x2, distancePoints.y2);
-  return 0;
+    cout<<timeElapsed<<distancePoints.size<<distancePoints.x1<<distancePoints.y1<<distancePoints.x2<<distancePoints.y2<<endl;  
+    return 0;
 }

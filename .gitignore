@@ -4,3 +4,7 @@ main.dSYM/Contents/Resources/DWARF/main
 .vscode/launch.json
 main.dSYM/Contents/Info.plist
 main
+closest.dSYM/Contents/Info.plist
+closest.dSYM/Contents/Resources/DWARF/closest
+closest
+.DS_Store
